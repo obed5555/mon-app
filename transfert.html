@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfert</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        header {
+            background-color: orange;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .notification, header .language {
+            font-size: 16px;
+        }
+
+        .transfer {
+            padding: 20px;
+        }
+
+        .transfer h2 {
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: orange;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .cards-container {
+                flex-direction: row;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .transfer-button {
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .transfer-button:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <a href="prin.html"><div class="notification">Accueil</div></a>
+        <div class="language">Langue: 
+            <select id="language-select">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="transfer">
+        <h2 id="transfer-title">Transfert</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3 id="sender-title">Émetteur</h3>
+                <div class="form-group">
+                    <label for="sender-number" id="sender-number-label">Numéro</label>
+                    <input type="text" id="sender-number" maxlength="10" placeholder="Entrez le numéro">
+                </div>
+                <div class="form-group">
+                    <label for="sender-network" id="sender-network-label">Réseau</label>
+                    <select id="sender-network">
+                        <option value=""></option>
+                        <option value="wave">Wave</option>
+                        <option value="orange">Orange</option>
+                        <option value="mtn">MTN</option>
+                        <option value="moov">Moov</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 id="receiver-title">Récepteur</h3>
+                <div class="form-group">
+                    <label for="receiver-number" id="receiver-number-label">Numéro</label>
+                    <input type="text" id="receiver-number" maxlength="10" placeholder="Entrez le numéro">
+                </div>
+                <div class="form-group">
+                    <label for="receiver-network" id="receiver-network-label">Réseau</label>
+                    <select id="receiver-network">
+                        <option value=""></option>
+                        <option value="orange">Orange</option>
+                        <option value="mtn">MTN</option>
+                        <option value="moov">Moov</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="transfer-button" id="transfer-button">Transférer</button>
+        </div>
+    </div>
+
+    <script>
+        const languageSelect = document.getElementById('language-select');
+        
+        const translations = {
+            en: {
+                notification: "Notifications",
+                transferTitle: "Transfer",
+                senderTitle: "Sender",
+                receiverTitle: "Receiver",
+                senderNumberLabel: "Number",
+                senderNetworkLabel: "Network",
+                receiverNumberLabel: "Number",
+                receiverNetworkLabel: "Network",
+                transferButton: "Transfer"
+            },
+            fr: {
+                notification: "Notifications",
+                transferTitle: "Transfert",
+                senderTitle: "Émetteur",
+                receiverTitle: "Récepteur",
+                senderNumberLabel: "Numéro",
+                senderNetworkLabel: "Réseau",
+                receiverNumberLabel: "Numéro",
+                receiverNetworkLabel: "Réseau",
+                transferButton: "Transférer"
+            }
+        };
+
+        languageSelect.addEventListener('change', (event) => {
+            const lang = event.target.value;
+            const translation = translations[lang];
+
+            document.getElementById('notification').textContent = translation.notification;
+            document.getElementById('transfer-title').textContent = translation.transferTitle;
+            document.getElementById('sender-title').textContent = translation.senderTitle;
+            document.getElementById('receiver-title').textContent = translation.receiverTitle;
+            document.getElementById('sender-number-label').textContent = translation.senderNumberLabel;
+            document.getElementById('sender-network-label').textContent = translation.senderNetworkLabel;
+            document.getElementById('receiver-number-label').textContent = translation.receiverNumberLabel;
+            document.getElementById('receiver-network-label').textContent = translation.receiverNetworkLabel;
+            document.getElementById('transfer-button').textContent = translation.transferButton;
+        });
+    </script>
+</body>
+<br><br>
+<style type="text/css">
+     footer {
+            background-color: #333; /* Fond sombre */
+            color: white; /* Texte blanc */
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+            position: relative;
+            width: 100%;
+        }
+
+        footer a {
+            color: orange; /* Lien orange */
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #FFD700; /* Jaune doré au survol */
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons img {
+            width: 25px;
+            height: 25px;
+            margin: 0 5px;
+            vertical-align: middle;
+            transition: transform 0.3s;
+        }
+
+        footer .social-icons img:hover {
+            transform: scale(1.2); /* Agrandir légèrement au survol */
+        }
+    </style>
+</style>
+    <footer>
+        <p>&copy; 2024 ObedAbble. Tous droits réservés.</p>
+        <p>
+            <a href="#">À propos</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">Mentions légales</a>
+        </p>
+        <div class="social-icons">
+            <!-- Add social icons here if needed -->
+        </div>
+    </footer>
+</html>

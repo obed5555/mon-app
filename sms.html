@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        header {
+            background-color: orange;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .notification, header .language {
+            font-size: 16px;
+        }
+
+        .transfer {
+            padding: 20px;
+        }
+
+        .transfer h2 {
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: orange;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .cards-container {
+                flex-direction: row;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .transfer-button {
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .transfer-button:hover {
+            background-color: darkorange;
+        }
+
+        .news-section {
+            margin-top: 40px;
+        }
+
+        .news-section h2 {
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        .news-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .news-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .news-card h3.wave {
+            color: #87CEEB; /* Bleu ciel */
+        }
+
+        .news-card h3.orange {
+            color: orange;
+        }
+
+        .news-card h3.mtn {
+            color: #FFD700; /* Jaune */
+        }
+
+        .news-card h3.moov {
+            color: #0000FF; /* Bleu pur */
+        }
+
+        @media (min-width: 768px) {
+            .news-cards-container {
+                justify-content: space-between;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="prin.html"><div class="notification">Accueil</div></a>
+        <div class="language">
+            Langue: 
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="transfer">
+        <h2 id="transferTitle">Souscription SMS</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3 id="senderTitle">Émetteur</h3>
+                <div class="form-group">
+                    <label for="sender-number" id="senderNumberLabel">Numéro</label>
+                    <input type="text" id="sender-number" maxlength="10" placeholder="Entrez le numéro">
+                </div>
+                <div class="form-group">
+                    <label for="sender-network" id="senderNetworkLabel">Réseau</label>
+                    <select id="sender-network">
+                        <option value=""></option>
+                        <option value="wave">Wave</option>
+                        <option value="orange">Orange</option>
+                        <option value="mtn">MTN</option>
+                        <option value="moov">Moov</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 id="receiverTitle">Récepteur</h3>
+                <div class="form-group">
+                    <label for="receiver-number" id="receiverNumberLabel">Numéro</label>
+                    <input type="text" id="receiver-number" maxlength="10" placeholder="Entrez le numéro">
+                </div>
+                <div class="form-group">
+                    <label for="receiver-network" id="receiverNetworkLabel">Réseau</label>
+                    <select id="receiver-network">
+                        <option value=""></option>
+                        <option value="orange">Orange</option>
+                        <option value="mtn">MTN</option>
+                        <option value="moov">Moov</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="transfer-button" id="transferButton">Souscrire</button>
+        </div>
+    </div>
+
+    <div class="news-section">
+        <h2 id="newsSectionTitle">Fils d'actualité</h2>
+        <div class="news-cards-container">
+            
+            <a href="https://www.orange.ci/fr/pass-mix-new.html"><div class="news-card">
+                <h3 class="orange">Orange</h3>
+                <p id="newsOrange">Profitez des nouveautés et promotions d'Orange.</p>
+            </div></a>
+            <a href="https://www.mtn.ci/deal/les-packs-free/"><div class="news-card">
+                <h3 class="mtn">MTN</h3>
+                <p id="newsMtn">Restez informé des offres MTN disponibles.</p>
+            </div></a>
+            <a href="https://www.moov-africa.ci/espace-particulier/forfaits-izy-heures/"><div class="news-card">
+                <h3 class="moov">Moov</h3>
+                <p id="newsMoov">Explorez les avantages et nouveautés Moov.</p>
+            </div></a>
+        </div>
+    </div>
+
+
+    <script>
+        const translations = {
+            en: {
+                transferTitle: "Transfer",
+                senderTitle: "Sender",
+                receiverTitle: "Receiver",
+                senderNumberLabel: "Number",
+                senderNetworkLabel: "Network",
+                receiverNumberLabel: "Number",
+                receiverNetworkLabel: "Network",
+                transferButton: "Transfer",
+                newsSectionTitle: "News Feed",
+                newsWave: "Discover the latest news and offers from Wave.",
+                newsOrange: "Enjoy the latest updates and promotions from Orange.",
+                newsMtn: "Stay informed about the available MTN offers.",
+                newsMoov: "Explore the benefits and new features of Moov."
+            },
+            fr: {
+                transferTitle: "Transfert",
+                senderTitle: "Émetteur",
+                receiverTitle: "Récepteur",
+                senderNumberLabel: "Numéro",
+                senderNetworkLabel: "Réseau",
+                receiverNumberLabel: "Numéro",
+                receiverNetworkLabel: "Réseau",
+                transferButton: "Transférer",
+                newsSectionTitle: "Fils d'actualité",
+                newsWave: "Découvrez les dernières actualités et offres Wave.",
+                newsOrange: "Profitez des nouveautés et promotions d'Orange.",
+                newsMtn: "Restez informé des offres MTN disponibles.",
+                newsMoov: "Explorez les avantages et nouveautés Moov."
+            }
+        };
+
+        function changeLanguage() {
+            const language = document.getElementById("languageSelect").value;
+            const langData = translations[language];
+            document.getElementById("transferTitle").innerText = langData.transferTitle;
+            document.getElementById("senderTitle").innerText = langData.senderTitle;
+            document.getElementById("receiverTitle").innerText = langData.receiverTitle;
+            document.getElementById("senderNumberLabel").innerText = langData.senderNumberLabel;
+            document.getElementById("senderNetworkLabel").innerText = langData.senderNetworkLabel;
+            document.getElementById("receiverNumberLabel").innerText = langData.receiverNumberLabel;
+            document.getElementById("receiverNetworkLabel").innerText = langData.receiverNetworkLabel;
+            document.getElementById("transferButton").innerText = langData.transferButton;
+            document.getElementById("newsSectionTitle").innerText = langData.newsSectionTitle;
+            document.getElementById("newsWave").innerText = langData.newsWave;
+            document.getElementById("newsOrange").innerText = langData.newsOrange;
+            document.getElementById("newsMtn").innerText = langData.newsMtn;
+            document.getElementById("newsMoov").innerText = langData.newsMoov;
+        }
+    </script>
+</body>
+<br><br>
+
+<style type="text/css">
+     footer {
+            background-color: #333; /* Fond sombre */
+            color: white; /* Texte blanc */
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+            position: relative;
+            width: 100%;
+        }
+
+        footer a {
+            color: orange; /* Lien orange */
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #FFD700; /* Jaune doré au survol */
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons img {
+            width: 25px;
+            height: 25px;
+            margin: 0 5px;
+            vertical-align: middle;
+            transition: transform 0.3s;
+        }
+
+        footer .social-icons img:hover {
+            transform: scale(1.2); /* Agrandir légèrement au survol */
+        }
+    </style>
+</style>
+    <footer>
+        <p>&copy; 2024 ObedAbble. Tous droits réservés.</p>
+        <p>
+            <a href="#">À propos</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">Mentions légales</a>
+        </p>
+        <div class="social-icons">
+            <!-- Add social icons here if needed -->
+        </div>
+    </footer>
+</html>
+

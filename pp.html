@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+ <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        header {
+            background-color: orange;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .notification, header .language {
+            font-size: 16px;
+        }
+
+        .dashboard {
+            padding: 20px;
+        }
+
+        .dashboard h2 {
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        .dashboard .info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: center; /* Center the cards horizontally */
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: orange;
+            margin-bottom: 15px;
+        }
+
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            background: #ffe6b3;
+        }
+
+        .category h3 {
+            color: orange;
+            margin-bottom: 10px;
+        }
+
+        .history {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .history h2 {
+            color: orange;
+            margin-bottom: 15px;
+        }
+
+        .history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history table th, .history table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history table th {
+            background-color: orange;
+            color: white;
+        }
+
+        @media (min-width: 768px) {
+            .dashboard .info {
+                flex-direction: row;
+                justify-content: center; /* Center the cards horizontally */
+            }
+
+            .categories {
+                flex-direction: row;
+            }
+
+            .category {
+                margin: 0;
+                flex: 1;
+            }
+        }
+    </style>
+<body>
+	  <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        /* Style de la modale */
+        .terms-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .terms-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .terms-container h2 {
+            color: orange;
+            margin-bottom: 15px;
+        }
+
+        .terms-container p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .terms-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .accept-btn {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .accept-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .accept-btn:hover:enabled {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div class="terms-modal">
+        <div class="terms-container">
+            <h2>Conditions d'utilisation</h2>
+            <p>
+                Pour utiliser ce site, vous devez lire et accepter nos 
+                <a href="#" style="color: orange; text-decoration: none;">conditions générales d'utilisation</a>.
+            </p>
+            <label>
+                <input type="checkbox" id="terms-checkbox"> 
+                J'accepte les conditions générales d'utilisation.
+            </label>
+            <br><br>
+            <button id="accept-button" class="accept-btn" disabled>Accéder au site</button>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        const termsCheckbox = document.getElementById('terms-checkbox');
+        const acceptButton = document.getElementById('accept-button');
+        const modal = document.querySelector('.terms-modal');
+
+        // Activer le bouton uniquement si la case est cochée
+        termsCheckbox.addEventListener('change', function () {
+            acceptButton.disabled = !termsCheckbox.checked;
+        });
+
+        // Fermer la modale une fois le bouton cliqué
+        acceptButton.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+    </script>
+<header>
+    <div class="notification" data-translate="notifications">Notifications</div>
+    <div class="language">
+        Langue:
+        <select id="language-selector">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+</header>
+
+<div class="dashboard">
+    <h2 data-translate="dashboard-title">Tableau de Bord</h2>
+
+    <div class="info">
+        <div class="card">
+            <h3 data-translate="number-title">Numéro</h3>
+            <p data-translate="number-value">+225 07 123 4567</p>
+        </div>
+        
+        <div class="card">
+            <h3 data-translate="status-title">Statut de l'abonnement</h3>
+            <p data-translate="status-value">Forfait Internet Actif</p>
+        </div>
+    </div>
+
+    <h2 data-translate="categories-title">Catégories</h2>
+    <div class="categories">
+        <div class="category">
+            <h3 data-translate="transfer-title">Transfert</h3>
+        </div>
+        <div class="category">
+            <h3 data-translate="internet-title">Internet</h3>
+        </div>
+        <div class="category">
+            <h3 data-translate="calls-title">Appels</h3>
+        </div>
+        <div class="category">
+            <h3 data-translate="sms-title">SMS</h3>
+        </div>
+    </div>
+
+    <div class="history">
+        <h2 data-translate="history-title">Historique des Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th data-translate="date-header">Date</th>
+                    <th data-translate="service-header">Service</th>
+                    <th data-translate="amount-header">Montant</th>
+                    <th data-translate="status-header">Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>28/12/2024</td>
+                    <td data-translate="service-value-1">Forfait Internet 1 Go</td>
+                    <td>1 000 FCFA</td>
+                    <td data-translate="status-value-1">Réussi</td>
+                </tr>
+                <tr>
+                    <td>27/12/2024</td>
+                    <td data-translate="service-value-2">Appels illimités</td>
+                    <td>5 000 FCFA</td>
+                    <td data-translate="status-value-2">Échec</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+	const translations = {
+    fr: {
+        notifications: "Notifications",
+        "dashboard-title": "Tableau de Bord",
+        "number-title": "Numéro",
+        "number-value": "+225 07 123 4567",
+        "status-title": "Statut de l'abonnement",
+        "status-value": "Forfait Internet Actif",
+        "categories-title": "Catégories",
+        "transfer-title": "Transfert",
+        "internet-title": "Internet",
+        "calls-title": "Appels",
+        "sms-title": "SMS",
+        "history-title": "Historique des Transactions",
+        "date-header": "Date",
+        "service-header": "Service",
+        "amount-header": "Montant",
+        "status-header": "Statut",
+        "service-value-1": "Forfait Internet 1 Go",
+        "status-value-1": "Réussi",
+        "service-value-2": "Appels illimités",
+        "status-value-2": "Échec"
+    },
+    en: {
+        notifications: "Notifications",
+        "dashboard-title": "Dashboard",
+        "number-title": "Number",
+        "number-value": "+225 07 123 4567",
+        "status-title": "Subscription Status",
+        "status-value": "Active Internet Plan",
+        "categories-title": "Categories",
+        "transfer-title": "Transfer",
+        "internet-title": "Internet",
+        "calls-title": "Calls",
+        "sms-title": "SMS",
+        "history-title": "Transaction History",
+        "date-header": "Date",
+        "service-header": "Service",
+        "amount-header": "Amount",
+        "status-header": "Status",
+        "service-value-1": "1 GB Internet Plan",
+        "status-value-1": "Success",
+        "service-value-2": "Unlimited Calls",
+        "status-value-2": "Failed"
+    }
+};
+
+const languageSelector = document.getElementById("language-selector");
+const elementsToTranslate = document.querySelectorAll("[data-translate]");
+
+function updateLanguage(lang) {
+    elementsToTranslate.forEach(el => {
+        const key = el.getAttribute("data-translate");
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+}
+
+// Update language when the selector changes
+languageSelector.addEventListener("change", (event) => {
+    updateLanguage(event.target.value);
+});
+
+// Set default language on page load
+updateLanguage(languageSelector.value || "fr");
+
+</script>
+</body>
+</html>
